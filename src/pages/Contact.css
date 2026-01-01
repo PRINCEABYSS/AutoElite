@@ -1,0 +1,184 @@
+.contact-page {
+  position: relative;
+  min-height: 100vh;
+  color: white;
+  padding: 120px 0 80px;
+}
+
+.video-bg-wrapper {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  z-index: -2;
+}
+
+.luxury-video {
+  width: 100%; height: 100%; object-fit: cover;
+}
+
+.video-overlay {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: radial-gradient(circle, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.95) 100%);
+  z-index: -1;
+}
+
+.contact-main-title {
+  text-align: center;
+  font-size: 4rem;
+  font-weight: 900;
+  margin-bottom: 60px;
+  background: linear-gradient(to bottom, #fff 30%, #666 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-transform: uppercase;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 35px;
+  padding: 40px;
+  margin-bottom: 25px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+.glass-card h3 {
+  color: #ff6b35;
+  font-size: 1.6rem;
+  margin-bottom: 25px;
+  font-weight: 800;
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 25px;
+}
+
+.detail-item .icon { font-size: 1.5rem; color: #ff6b35; }
+.detail-item a, .detail-item p { color: white; text-decoration: none; font-size: 1.1rem; font-weight: 600; }
+
+.work-hours p { margin-bottom: 10px; font-size: 1.1rem; }
+.work-hours span { color: #888; font-weight: 400; }
+
+.social-actions {
+  display: flex;
+  gap: 20px;
+}
+
+.social-link {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 18px;
+  text-decoration: none;
+  color: white;
+  font-weight: 700;
+  transition: 0.4s;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.social-link img { width: 24px; }
+.social-link.wa { background: rgba(37, 211, 102, 0.1); }
+.social-link.tg { background: rgba(0, 136, 204, 0.1); }
+
+.social-link.wa:hover { background: #25d366; box-shadow: 0 0 30px rgba(37, 211, 102, 0.5); transform: translateY(-5px); }
+.social-link.tg:hover { background: #0088cc; box-shadow: 0 0 30px rgba(0, 136, 204, 0.5); transform: translateY(-5px); }
+
+.floating-input-group {
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.floating-input-group input, .floating-input-group textarea {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+  padding: 12px 0;
+  color: white;
+  font-size: 1.1rem;
+  outline: none;
+  transition: 0.3s;
+}
+
+.floating-input-group label {
+  position: absolute;
+  left: 0; top: 12px;
+  color: #666;
+  transition: 0.3s;
+  pointer-events: none;
+}
+
+.floating-input-group input:focus ~ label, 
+.floating-input-group input:not(:placeholder-shown) ~ label,
+.floating-input-group textarea:focus ~ label,
+.floating-input-group textarea:not(:placeholder-shown) ~ label {
+  top: -18px; font-size: 0.85rem; color: #ff6b35;
+}
+
+.floating-input-group input:focus, .floating-input-group textarea:focus {
+  border-color: #ff6b35;
+}
+
+.premium-submit-btn {
+  width: 100%;
+  background: #ff6b35;
+  color: white;
+  padding: 20px;
+  border: none;
+  border-radius: 20px;
+  font-weight: 800;
+  font-size: 1rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+.premium-submit-btn:hover {
+  background: #ff8152;
+  transform: scale(1.02);
+  box-shadow: 0 10px 30px rgba(255, 107, 53, 0.4);
+}
+
+.map-section {
+  padding: 0;
+  height: 500px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.leaflet-map-frame {
+  width: 100%;
+  height: 100%;
+}
+
+.success-view {
+  text-align: center;
+  padding: 40px 0;
+}
+
+.check-circle {
+  width: 80px; height: 80px;
+  border: 4px solid #ff6b35;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 40px; color: #ff6b35; margin: 0 auto 20px;
+}
+
+@media (max-width: 1024px) {
+  .contact-grid { grid-template-columns: 1fr; }
+  .contact-main-title { font-size: 2.8rem; }
+}

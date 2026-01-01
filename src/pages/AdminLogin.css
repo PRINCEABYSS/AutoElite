@@ -1,0 +1,100 @@
+.admin-login-page {
+  height: 100vh;
+  background: radial-gradient(circle at center, #1a1a1a 0%, #050505 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Orbitron', sans-serif; 
+}
+
+.login-glass-box {
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  padding: 60px 80px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 107, 53, 0.3);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(255, 107, 53, 0.05);
+}
+
+.scanner-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #ff6b35, transparent);
+  box-shadow: 0 0 15px #ff6b35;
+  animation: scan 3s infinite linear;
+  z-index: 2;
+}
+
+@keyframes scan {
+  0% { top: 0; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+.auth-header h2 {
+  color: #fff;
+  letter-spacing: 5px;
+  margin: 10px 0 30px;
+  font-weight: 800;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.system-status {
+  color: #ff6b35;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+}
+
+.interface-decoration {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  color: rgba(255, 255, 255, 0.4);
+  margin-bottom: 40px;
+}
+
+.id-badge {
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+.login-btn {
+  background: transparent;
+  border: 1px solid #ff6b35;
+  color: #ff6b35;
+  padding: 18px 40px;
+  font-size: 1rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+.login-btn:hover {
+  background: #ff6b35;
+  color: #000;
+  box-shadow: 0 0 30px rgba(255, 107, 53, 0.5);
+}
+
+.login-btn:active {
+  transform: scale(0.95);
+}
+
+.security-notice {
+  margin-top: 30px;
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.2);
+  letter-spacing: 1px;
+}

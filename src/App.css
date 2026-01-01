@@ -1,0 +1,28 @@
+
+body.light {
+  background-color: #f5f5f5;
+  color: #1a1a1a;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+body.dark {
+  background-color: #0a0a0a;
+  color: #ffffff;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+body.dark .car-card, 
+body.dark header, 
+body.dark footer {
+  background-color: #151515;
+  border-color: #333;
+  color: white;
+}
+
+body.light .car-card, 
+body.light header, 
+body.light footer {
+  background-color: #ffffff;
+  border-color: #ddd;
+  color: #1a1a1a;
+}

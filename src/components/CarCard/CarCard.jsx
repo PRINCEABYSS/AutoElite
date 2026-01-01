@@ -23,7 +23,7 @@ const CarCard = ({ car }) => {
 				<h3>
 					{car.brand} {car.model}
 				</h3>
-				<p className='car-price'>${car.price?.toLocaleString()}</p>
+				<p className='car-price'>{car.price?.toLocaleString()}</p>
 
 				<div
 					className='card-actions'

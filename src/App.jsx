@@ -21,7 +21,7 @@ const ProtectedRoute = ({ children }) => {
 }
 
 function App() {
-	const theme = useSelector(state => state.theme?.theme || 'light')
+	const theme = useSelector(state => state.theme?.theme || 'dark')
 
 	useEffect(() => {
 		document.body.className = theme

@@ -292,3 +292,90 @@
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
   border-color: #ff6b35;
 }
+
+
+@media (max-width: 1024px) {
+  .brands-grid {
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .brands-section {
+    padding: 60px 0;
+  }
+
+  .brands-grid {
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 15px;
+    padding: 10px;
+  }
+
+  .brand-card {
+    padding: 20px 10px;
+  }
+
+  .brand-logo-wrapper {
+    width: 60px;
+    height: 60px; 
+  }
+
+  .brand-name {
+    font-size: 1rem;
+  }
+
+  .brand-desc {
+    font-size: 0.75rem;
+    display: none; 
+  }
+}
+
+@media (max-width: 480px) {
+  .section-title {
+    font-size: 1.8rem;
+    margin-bottom: 40px;
+  }
+  
+  .brands-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+
+body.dark .brands-section {
+  background-color: #121212;
+}
+
+body.dark .brand-card {
+  background: #1e1e1e; 
+  border-color: #333;
+}
+
+body.dark .brand-name {
+  color: #ffffff;
+}
+
+body.dark .brand-desc {
+  color: #888;
+}
+
+body.dark .section-title {
+  background: linear-gradient(135deg, #ffffff 30%, #ff6b35 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+body.dark .brand-card:hover {
+  border-color: #ff6b35;
+  box-shadow: 0 10px 30px rgba(255, 107, 53, 0.15);
+}
+
+body.dark .brand-card::before {
+  background: radial-gradient(
+    circle, 
+    rgba(255, 107, 53, 0) 0%, 
+    rgba(255, 107, 53, 0.02) 50%, 
+    rgba(255, 107, 53, 0.1) 100%
+  );
+}

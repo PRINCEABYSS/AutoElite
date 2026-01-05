@@ -20,7 +20,7 @@ const Brands = () => {
       desc: { ru: 'Французская элегантность', en: 'French elegance', kg: 'Франциялык элеганттуулук' }
     },
     { 
-      id: 3, name: 'Toyota', logo: 'https://png.klev.club/uploads/posts/2024-04/png-klev-club-qs8w-p-toiota-png-6.png',
+      id: 3, name: 'Toyota', logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUmA8wmnkocHMrW3r2Uyd2zfslmA9HOMBgtw&s',
       desc: { ru: 'Японская надежность', en: 'Japanese reliability', kg: 'Япониялык ишенимдүүлүк' }
     },
     { 
@@ -40,7 +40,7 @@ const Brands = () => {
       desc: { ru: 'Экстремальный дизайн', en: 'Extreme design', kg: 'Экстремалдык дизайн' }
     },
     { 
-      id: 8, name: 'Porsche', logo: 'https://e7.pngegg.com/pngimages/417/210/png-clipart-porsche-logo-porsche-911-porsche-panamera-logo-porsche-car-logo-brand-emblem-label-thumbnail.png',
+      id: 8, name: 'Porsche', logo: 'https://upload.wikimedia.org/wikipedia/de/7/70/Porsche_Logo.svg',
       desc: { ru: 'Спортивное превосходство', en: 'Sports excellence', kg: 'Спорттук артыкчылык' }
     },
     { 

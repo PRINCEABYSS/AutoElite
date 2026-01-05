@@ -20,7 +20,7 @@ const Brands = () => {
       desc: { ru: 'Французская элегантность', en: 'French elegance', kg: 'Франциялык элеганттуулук' }
     },
     { 
-      id: 3, name: 'Toyota', logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUmA8wmnkocHMrW3r2Uyd2zfslmA9HOMBgtw&s',
+      id: 3, name: 'Toyota', logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBGIEvY6aIvdLBWwXeWbUTnX5Z0PswBrUhaA&s',
       desc: { ru: 'Японская надежность', en: 'Japanese reliability', kg: 'Япониялык ишенимдүүлүк' }
     },
     { 

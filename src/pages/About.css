@@ -1,4 +1,4 @@
-
+/* Базовые настройки страницы */
 .about-luxury-page {
   position: relative;
   min-height: 100vh;
@@ -8,17 +8,17 @@
   overflow-x: hidden;
 }
 
-
-.video-container {
-  position: fixed;
+/* ФОНОВОЕ ВИДЕО */
+.video-background-container {
+  position: fixed; /* Фиксируем, чтобы видео было фоном при скролле */
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
-  z-index: -2;
+  height: 100vh;
+  z-index: -1;
 }
 
-.luxury-video {
+.bg-video {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -30,110 +30,183 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.9) 100%);
-  z-index: -1;
+  /* Затемнение для читаемости текста */
+  background: radial-gradient(circle, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.8) 100%);
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
+/* КОНТЕНТ */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
 
 .about-content {
-  padding: 150px 0 100px;
+  padding: 120px 0 80px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-
+/* ГЛАВНАЯ КАРТОЧКА (ГЕРОЙ) */
 .about-hero-glass {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(25px);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 40px;
-  padding: 60px;
+  padding: 60px 40px;
   text-align: center;
   max-width: 900px;
-  margin-bottom: 60px;
-  box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+  margin-bottom: 50px;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.4);
 }
 
 .premium-badge {
   color: #ff6b35;
-  letter-spacing: 5px;
-  font-size: 0.8rem;
+  letter-spacing: 4px;
+  font-size: 0.85rem;
   text-transform: uppercase;
-  font-weight: 900;
+  font-weight: 800;
+  display: block;
+  margin-bottom: 15px;
 }
 
 .main-title {
-  font-size: 4.5rem;
-  margin: 25px 0;
+  font-size: clamp(2.5rem, 8vw, 4.5rem); /* Адаптивный размер шрифта */
+  margin: 10px 0 25px;
   font-weight: 900;
-  background: linear-gradient(180deg, #fff 0%, #777 100%);
+  background: linear-gradient(180deg, #ffffff 30%, #a0a0a0 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  line-height: 1.1;
 }
 
 .description {
-  font-size: 1.3rem;
-  line-height: 1.8;
-  opacity: 0.8;
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.8);
 }
 
-
-.about-stats-row {
+/* СЕТКА СТАТИСТИКИ */
+.about-stats-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 30px;
+  gap: 20px;
   width: 100%;
-  margin-bottom: 60px;
+  margin-bottom: 50px;
 }
 
 .stat-glass-card {
-  background: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(15px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  padding: 40px 20px;
-  border-radius: 30px;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 35px 20px;
+  border-radius: 25px;
   text-align: center;
-  transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: all 0.4s ease;
 }
 
 .stat-glass-card:hover {
-  transform: translateY(-15px);
-  background: rgba(255, 107, 53, 0.1);
+  transform: translateY(-10px);
+  background: rgba(255, 107, 53, 0.15);
   border-color: #ff6b35;
 }
 
 .stat-number {
-  font-size: 3.5rem;
+  font-size: 2.8rem;
   color: #ff6b35;
   font-weight: 800;
-  text-shadow: 0 0 25px rgba(255, 107, 53, 0.4);
+  margin-bottom: 5px;
 }
 
 .stat-text {
-  font-size: 1rem;
-  color: #ccc;
+  font-size: 0.8rem;
+  color: #aaa;
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 1.5px;
 }
 
+/* КАРТОЧКА МИССИИ */
 .mission-glass-card {
   position: relative;
   background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(20px);
-  padding: 50px;
-  border-radius: 35px;
-  border-left: 5px solid #ff6b35;
+  backdrop-filter: blur(15px);
+  padding: 40px;
+  border-radius: 30px;
   max-width: 1000px;
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
+.mission-accent {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  background: #ff6b35;
+  box-shadow: 0 0 20px rgba(255, 107, 53, 0.6);
+}
 
+.mission-inner h3 {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  color: #ff6b35;
+}
+
+.mission-inner p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* АДАПТИВНОСТЬ */
+
+/* Планшеты */
 @media (max-width: 1024px) {
-  .about-stats-row { grid-template-columns: repeat(2, 1fr); }
-  .main-title { font-size: 3rem; }
+  .about-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+  .about-hero-glass {
+    padding: 40px 30px;
+  }
 }
 
-@media (max-width: 600px) {
-  .about-stats-row { grid-template-columns: 1fr; }
-  .about-hero-glass { padding: 30px; }
+/* Мобильные устройства */
+@media (max-width: 650px) {
+  .about-content {
+    padding: 80px 0 40px;
+  }
+  
+  .about-stats-grid {
+    grid-template-columns: 1fr; /* В одну колонку на телефонах */
+  }
+
+  .stat-glass-card {
+    padding: 25px;
+  }
+
+  .stat-number {
+    font-size: 2.2rem;
+  }
+
+  .mission-glass-card {
+    padding: 30px 20px;
+  }
+
+  .main-title {
+    margin-bottom: 15px;
+  }
+}
+
+/* Для очень маленьких экранов */
+@media (max-width: 380px) {
+  .about-hero-glass {
+    padding: 25px 15px;
+    border-radius: 20px;
+  }
 }

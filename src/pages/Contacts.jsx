@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import buy from '../assets/покупатель.mp4';
 import './Contact.css';
 
 const customIcon = new L.Icon({
@@ -37,7 +38,7 @@ const Contact = () => {
 
       <div className="video-bg-wrapper">
         <video autoPlay loop muted playsInline className="luxury-video">
-          <source src="https://cdn.pixabay.com/video/2023/10/20/185793-876113110_large.mp4" type="video/mp4" />
+          <source src={buy} type="video/mp4" />
         </video>
         <div className="video-overlay"></div>
       </div>

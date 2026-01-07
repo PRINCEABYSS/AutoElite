@@ -1,157 +1,231 @@
-import React from 'react';
+import React, { useState, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-
-import { removeFromGarage } from '../features/garage/garageSlice'; 
-
+import { useNavigate } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
+import { removeFromGarage } from '../features/garage/garageSlice'; // Убедись, что путь верный
+import bgfon from '../assets/задний фон.jpg';
+import './Garage.css';
 
 const translations = {
   ru: {
     garage: "Мой Гараж",
     emptyGarage: "Ваш гараж пока пуст",
-    removeFromGarage: "Удалить",
-    price: "Цена:"
+    backToCatalog: "Вернуться в каталог",
+    totalValue: "Сумма заказа:",
+    checkout: "Оформить заказ",
+    remove: "Удалить",
+    details: "Инфо",
+    confirmDelete: "Удалить из заказа?",
+    searchPlaceholder: "Поиск в коллекции...",
+    count: "Автомобилей:",
+    noResults: "Ничего не найдено",
+    formTitle: "Оформление покупки",
+    name: "Ваше имя",
+    phone: "Номер телефона",
+    city: "Город доставки",
+    orderBtn: "Подтвердить покупку",
+    successTitle: "Заказ оформлен!",
+    successText: "Наш менеджер свяжется с вами в ближайшее время.",
+    back: "Вернуться"
   },
   en: {
     garage: "My Garage",
-    emptyGarage: "Your garage is empty",
-    removeFromGarage: "Remove",
-    price: "Price:"
+    emptyGarage: "Garage is empty",
+    backToCatalog: "Back to Catalog",
+    totalValue: "Total Amount:",
+    checkout: "Proceed to Checkout",
+    remove: "Remove",
+    details: "Details",
+    confirmDelete: "Remove from order?",
+    searchPlaceholder: "Search cars...",
+    count: "Cars total:",
+    noResults: "No results",
+    formTitle: "Checkout Process",
+    name: "Full Name",
+    phone: "Phone Number",
+    city: "Delivery City",
+    orderBtn: "Confirm Order",
+    successTitle: "Success!",
+    successText: "Our manager will contact you shortly.",
+    back: "Back"
   }
 };
 
 const Garage = () => {
   const dispatch = useDispatch();
-  
+  const navigate = useNavigate();
   const cars = useSelector((state) => state.garage.cars);
-  
   const lang = useSelector((state) => state.language?.lang || 'ru');
-  const t = translations[lang];
+  const t = translations[lang] || translations.ru;
 
-  if (!cars || cars.length === 0) {
+  // UI States
+  const [searchTerm, setSearchTerm] = useState('');
+  const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
+  const [orderStep, setOrderStep] = useState(1);
+  const [formData, setFormData] = useState({ name: '', phone: '', city: 'Bishkek' });
+
+  // Statistics
+  const totalCost = useMemo(() => cars.reduce((sum, car) => sum + Number(car.price), 0), [cars]);
+
+  // Filter Logic
+  const filteredCars = useMemo(() => {
+    return cars.filter(car => 
+      `${car.brand} ${car.model}`.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }, [cars, searchTerm]);
+
+  const handleOrder = (e) => {
+    e.preventDefault();
+    console.log("SENDING ORDER:", { customer: formData, items: cars, total: totalCost });
+    setOrderStep(2);
+  };
+
+  const handleCloseSuccess = () => {
+    setIsCheckoutOpen(false);
+    setOrderStep(1);
+    // Здесь можно вызвать dispatch(clearGarage()) если такой экшен есть
+  };
+
+  if (cars.length === 0 && orderStep !== 2) {
     return (
-      <div className="page-content" style={emptyStateStyle}>
-        <h2 style={{ fontSize: '2.5rem', marginBottom: '20px' }}>{t.emptyGarage}</h2>
-        <p style={{ fontSize: '5rem' }}>🏁</p>
-        <button 
-          onClick={() => window.history.back()} 
-          style={backBtnStyle}
-        >
-          Вернуться в каталог
-        </button>
+      <div className="garage-page-container empty" style={{ '--bg-image': `url(${bgfon})` }}>
+        <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} className="empty-content-card">
+          <div className="empty-icon">🏎️</div>
+          <h2>{t.emptyGarage}</h2>
+          <button onClick={() => navigate('/catalog')} className="btn-main-action">{t.backToCatalog}</button>
+        </motion.div>
       </div>
     );
   }
 
   return (
-    <div className="page-content" style={{ padding: '100px 20px', maxWidth: '1200px', margin: '0 auto' }}>
-      <h2 style={titleStyle}>{t.garage}</h2>
-      
-      <div style={gridStyle}>
-        {cars.map((car) => (
-          <div key={car.id} className="car-card-garage" style={cardStyle}>
-          
-            <div
-              style={{
-                height: '200px',
-                backgroundImage: `url(${car.images && car.images[0] ? car.images[0] : car.image})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                borderRadius: '15px 15px 0 0'
-              }}
-            />
-            
-            <div style={{ padding: '20px' }}>
-              <h3 style={{ margin: '0 0 10px 0', fontSize: '1.4rem' }}>
-                {car.brand} {car.model}
-              </h3>
-              <p style={{ color: '#ff6b35', fontWeight: 'bold', fontSize: '1.2rem', marginBottom: '20px' }}>
-                ${Number(car.price).toLocaleString()}
-              </p>
-              
-              <button
-                className="btn-remove"
-                onClick={() => dispatch(removeFromGarage(car.id))}
-                style={removeBtnStyle}
-              >
-                {t.removeFromGarage}
-              </button>
+    <div className="garage-page-container" style={{ '--bg-image': `url(${bgfon})` }}>
+      <div className="container">
+        <header className="garage-header">
+          <div className="header-info">
+            <h2 className="page-title">{t.garage}</h2>
+            <div className="header-chips">
+              <span className="chip">{t.count} <strong>{cars.length}</strong></span>
             </div>
           </div>
-        ))}
-      </div>
+          
+          <div className="garage-stats-card">
+            <span>{t.totalValue}</span>
+            <div className="total-amount">${totalCost.toLocaleString()}</div>
+            <button className="btn-checkout-trigger" onClick={() => setIsCheckoutOpen(true)}>
+              {t.checkout}
+            </button>
+          </div>
+        </header>
 
-      <style>{`
-        .car-card-garage {
-          transition: transform 0.3s ease, box-shadow 0.3s ease;
-          background: white;
-          border: 1px solid #eee;
-        }
-        .car-card-garage:hover {
-          transform: translateY(-10px);
-          box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-        }
-        .btn-remove:hover {
-          background: #ff4d4d !important;
-          color: white !important;
-        }
-      `}</style>
+        <div className="garage-controls">
+          <div className="search-box">
+            <input 
+              type="text" 
+              placeholder={t.searchPlaceholder}
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="garage-search-input"
+            />
+          </div>
+        </div>
+
+        <motion.div layout className="garage-grid">
+          <AnimatePresence mode='popLayout'>
+            {filteredCars.map((car) => (
+              <motion.div 
+                layout
+                key={car.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.5 }}
+                className="garage-item-card"
+              >
+                <div className="garage-item-image" style={{ backgroundImage: `url(${car.images?.[0] || car.image})` }}>
+                  <div className="image-overlay-price">${Number(car.price).toLocaleString()}</div>
+                </div>
+                <div className="garage-item-info">
+                  <div className="brand-label">{car.brand}</div>
+                  <h3>{car.model}</h3>
+                  <div className="garage-card-actions">
+                    <button className="btn-view-details" onClick={() => navigate(`/catalog/${car.id}`)}>{t.details}</button>
+                    <button className="btn-remove-garage" onClick={() => window.confirm(t.confirmDelete) && dispatch(removeFromGarage(car.id))}>{t.remove}</button>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </motion.div>
+
+        <AnimatePresence>
+          {isCheckoutOpen && (
+            <div className="modal-overlay" onClick={() => setIsCheckoutOpen(false)}>
+              <motion.div 
+                initial={{ opacity: 0, y: 100 }} 
+                animate={{ opacity: 1, y: 0 }} 
+                exit={{ opacity: 0, y: 100 }}
+                className="checkout-modal" 
+                onClick={e => e.stopPropagation()}
+              >
+                <button className="close-btn" onClick={() => setIsCheckoutOpen(false)}>✕</button>
+                
+                {orderStep === 1 ? (
+                  <form className="order-form" onSubmit={handleOrder}>
+                    <h3>{t.formTitle}</h3>
+                    <div className="order-summary-mini">
+                      {t.count} <strong>{cars.length}</strong> | Total: <strong>${totalCost.toLocaleString()}</strong>
+                    </div>
+                    
+                    <div className="input-group">
+                      <label>{t.name}</label>
+                      <input 
+                        required 
+                        type="text" 
+                        value={formData.name}
+                        onChange={e => setFormData({...formData, name: e.target.value})}
+                        placeholder="John Doe" 
+                      />
+                    </div>
+
+                    <div className="input-group">
+                      <label>{t.phone}</label>
+                      <input 
+                        required 
+                        type="tel" 
+                        value={formData.phone}
+                        onChange={e => setFormData({...formData, phone: e.target.value})}
+                        placeholder="+996 --- -- -- --" 
+                      />
+                    </div>
+
+                    <div className="input-group">
+                      <label>{t.city}</label>
+                      <select value={formData.city} onChange={e => setFormData({...formData, city: e.target.value})}>
+                        <option value="Bishkek">Bishkek</option>
+                        <option value="Osh">Osh</option>
+                        <option value="Almaty">Almaty</option>
+                      </select>
+                    </div>
+
+                    <button type="submit" className="btn-confirm-order">{t.orderBtn}</button>
+                  </form>
+                ) : (
+                  <div className="success-state">
+                    <div className="success-icon">🎉</div>
+                    <h2>{t.successTitle}</h2>
+                    <p>{t.successText}</p>
+                    <button className="btn-confirm-order" onClick={handleCloseSuccess}>
+                      {t.back}
+                    </button>
+                  </div>
+                )}
+              </motion.div>
+            </div>
+          )}
+        </AnimatePresence>
+      </div>
     </div>
   );
-};
-
-const emptyStateStyle = {
-  textAlign: 'center',
-  padding: '150px 20px',
-  minHeight: '80vh',
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'center',
-  alignItems: 'center'
-};
-
-const titleStyle = {
-  fontSize: '3rem',
-  fontWeight: '900',
-  marginBottom: '50px',
-  textAlign: 'center',
-  textTransform: 'uppercase',
-  letterSpacing: '2px'
-};
-
-const gridStyle = {
-  display: 'grid',
-  gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
-  gap: '30px'
-};
-
-const cardStyle = {
-  borderRadius: '20px',
-  overflow: 'hidden',
-  display: 'flex',
-  flexDirection: 'column'
-};
-
-const removeBtnStyle = {
-  width: '100%',
-  padding: '12px',
-  borderRadius: '10px',
-  border: '1px solid #ff4d4d',
-  background: 'transparent',
-  color: '#ff4d4d',
-  fontWeight: '700',
-  cursor: 'pointer',
-  transition: '0.3s'
-};
-
-const backBtnStyle = {
-  marginTop: '30px',
-  padding: '12px 25px',
-  borderRadius: '10px',
-  border: 'none',
-  background: '#ff6b35',
-  color: 'white',
-  fontWeight: 'bold',
-  cursor: 'pointer'
 };
 
 export default Garage;

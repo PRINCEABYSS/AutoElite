@@ -100,7 +100,7 @@ const Header = () => {
                 </div>
                 <div className='user-info-mini desktop-only'>
                   <span className='user-name-label'>{user.name}</span>
-                  <span className='user-status-label'>Premium</span>
+                  <span className='user-status-label'></span>
                 </div>
               </Link>
             ) : (

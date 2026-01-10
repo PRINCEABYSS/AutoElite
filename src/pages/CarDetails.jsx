@@ -2,10 +2,9 @@ import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 import { api } from '../Api/axios'
-
 import { addToGarage } from '../features/garage/garageSlice'
 
-
+// Твои локальные ассеты
 import audi from '../assets/PixVerse_V5.5_Image_Text_360P_сделай_мне_69_се.mp4'
 import bmw from '../assets/бмв видео.mp4'
 import bugatti from '../assets/буггати видео.mp4'
@@ -58,9 +57,8 @@ const CarDetails = () => {
 
 	const handleAddToGarage = () => {
 		if (car) {
-			dispatch(addToGarage(car)) 
+			dispatch(addToGarage(car))
 			setIsAdded(true)
-		
 			setTimeout(() => setIsAdded(false), 2000)
 		}
 	}
@@ -84,11 +82,12 @@ const CarDetails = () => {
 
 	const allImages =
 		car.images && car.images.length > 0 ? car.images : [car.image]
-	const currentVideo = videoMap[car.brand]
+
+	// Приоритет: Видео из админки -> Видео по бренду
+	const currentVideo = car.videoUrl || videoMap[car.brand]
 
 	return (
 		<div className='car-details-page' style={pageWrapperStyle}>
-			
 			{currentVideo && (
 				<>
 					<video
@@ -107,15 +106,13 @@ const CarDetails = () => {
 
 			<div className='page-content' style={contentContainerStyle}>
 				<div style={flexRowStyle}>
-				
+					{/* Левая колонка */}
 					<div style={{ flex: '1.2', minWidth: '350px' }}>
-						<div style={{ position: 'relative' }}>
-							<img
-								src={allImages[activeImg]}
-								alt={car.model}
-								style={mainImageStyle}
-							/>
-						</div>
+						<img
+							src={allImages[activeImg]}
+							alt={car.model}
+							style={mainImageStyle}
+						/>
 
 						<div style={thumbnailsContainerStyle}>
 							{allImages.map((img, index) => (
@@ -141,8 +138,9 @@ const CarDetails = () => {
 						</div>
 					</div>
 
-					<div style={{ flex: '1', minWidth: '350px', color: '#fff' }}>
-						<div style={{ marginBottom: '30px' }}>
+					{/* Правая колонка */}
+					<div style={{ flex: '1', minWidth: '350px' }}>
+						<div style={{ marginBottom: '25px' }}>
 							<span style={brandBadgeStyle}>{car.brand}</span>
 							<h1 style={modelTitleStyle}>{car.model}</h1>
 							<div style={priceStyle}>
@@ -158,38 +156,38 @@ const CarDetails = () => {
 								<strong>Двигатель:</strong> {car.engine}
 							</div>
 							<div style={specBoxStyle}>
-								<strong>Мощность:</strong> {car.horsepower} hp
+								<strong>Мощность:</strong> {car.hp || car.horsepower} hp
 							</div>
 							<div style={specBoxStyle}>
 								<strong>0-100:</strong> {car.acceleration}
 							</div>
 							<div style={specBoxStyle}>
-								<strong>Скорость:</strong> {car.topSpeed}
+								<strong>Скорость:</strong> {car.speed || car.topSpeed}
 							</div>
 							<div style={specBoxStyle}>
-								<strong>Привод:</strong> {car.driveType}
+								<strong>Привод:</strong> {car.drive || car.driveType}
 							</div>
 						</div>
 
 						{car.description && (
-							<div style={{ marginBottom: '35px' }}>
-								<h4 style={{ marginBottom: '10px', fontSize: '1.2rem' }}>
-									О модели
-								</h4>
+							<div style={{ marginBottom: '30px' }}>
+								<h4 style={{ color: '#fff', marginBottom: '8px' }}>О модели</h4>
 								<p style={descriptionStyle}>{car.description}</p>
 							</div>
 						)}
 
-						<div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+						{/* БЛОК КНОПОК - Исправлено расположение */}
+						<div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
 							<button
 								className={`btn-main-action ${isAdded ? 'added' : ''}`}
 								onClick={handleAddToGarage}
+								style={{ flex: 'none' }}
 							>
 								{isAdded ? 'В ГАРАЖЕ!' : 'Забронировать'}
 							</button>
 
 							<button className='btn-back-glass' onClick={() => navigate(-1)}>
-								<span style={{ marginRight: '8px' }}>←</span> Назад
+								<span>←</span> Назад
 							</button>
 						</div>
 					</div>
@@ -198,49 +196,34 @@ const CarDetails = () => {
 
 			<style>{`
         .btn-main-action {
-          padding: 16px 45px;
+          padding: 16px 40px;
           background: #ff6b35;
           color: white;
           border: none;
           border-radius: 14px;
           font-weight: 700;
-          font-size: 1rem;
           cursor: pointer;
-          transition: all 0.3s ease;
-          box-shadow: 0 10px 20px rgba(255, 107, 53, 0.3);
+          transition: 0.3s;
         }
-        .btn-main-action:hover {
-          background: #e55a2b;
-          transform: translateY(-2px);
-        }
-        .btn-main-action.added {
-          background: #27ae60;
-          box-shadow: 0 10px 20px rgba(39, 174, 96, 0.4);
-        }
+        .btn-main-action.added { background: #27ae60; }
         .btn-back-glass {
-          padding: 15px 35px;
+          padding: 15px 30px;
           background: rgba(255, 255, 255, 0.1);
           backdrop-filter: blur(10px);
-          -webkit-backdrop-filter: blur(10px);
           color: #fff;
           border: 1px solid rgba(255, 255, 255, 0.3);
           border-radius: 14px;
-          font-weight: 600;
           cursor: pointer;
-          transition: all 0.3s ease;
           display: flex;
           align-items: center;
-        }
-        .btn-back-glass:hover {
-          background: rgba(255, 255, 255, 0.2);
-          border-color: #ff6b35;
-          color: #ff6b35;
+          gap: 8px;
         }
       `}</style>
 		</div>
 	)
 }
 
+// Стили объекта
 const pageWrapperStyle = {
 	position: 'relative',
 	minHeight: '100vh',
@@ -261,74 +244,53 @@ const videoOverlayStyle = {
 	left: 0,
 	width: '100%',
 	height: '100%',
-	background: 'rgba(0,0,0,0.65)',
+	background: 'rgba(0,0,0,0.6)',
 	zIndex: -1,
 }
 const contentContainerStyle = {
-	paddingTop: '80px',
-	paddingBottom: '60px',
+	paddingTop: '100px',
 	maxWidth: '1200px',
 	margin: '0 auto',
 	position: 'relative',
 	zIndex: 1,
 }
-const flexRowStyle = {
-	display: 'flex',
-	gap: '50px',
-	flexWrap: 'wrap',
-	alignItems: 'flex-start',
-}
+const flexRowStyle = { display: 'flex', gap: '50px', flexWrap: 'wrap' }
 const mainImageStyle = {
 	width: '100%',
-	borderRadius: '30px',
-	height: '500px',
+	borderRadius: '25px',
+	height: '450px',
 	objectFit: 'cover',
-	boxShadow: '0 25px 50px rgba(0,0,0,0.5)',
 }
 const thumbnailsContainerStyle = {
 	display: 'flex',
-	gap: '12px',
-	marginTop: '20px',
-	overflowX: 'auto',
-	paddingBottom: '10px',
+	gap: '10px',
+	marginTop: '15px',
 }
 const brandBadgeStyle = {
 	color: '#ff6b35',
 	fontWeight: 'bold',
 	textTransform: 'uppercase',
-	letterSpacing: '2px',
-	fontSize: '1rem',
 }
 const modelTitleStyle = {
-	fontSize: '4rem',
+	fontSize: '3.5rem',
 	margin: '5px 0',
 	fontWeight: '900',
-	lineHeight: '1.1',
+	color: '#fff',
 }
-const priceStyle = {
-	fontSize: '3rem',
-	fontWeight: '800',
-	color: '#ff6b35',
-	marginTop: '15px',
-}
+const priceStyle = { fontSize: '2.5rem', fontWeight: '800', color: '#ff6b35' }
 const specsGridStyle = {
 	display: 'grid',
 	gridTemplateColumns: '1fr 1fr',
-	gap: '15px',
-	marginBottom: '35px',
+	gap: '12px',
+	marginBottom: '30px',
 }
 const specBoxStyle = {
 	background: 'rgba(255,255,255,0.1)',
-	padding: '15px',
-	borderRadius: '12px',
-	border: '1px solid rgba(255,255,255,0.1)',
+	padding: '12px 15px',
+	borderRadius: '10px',
 	color: '#fff',
+	border: '1px solid rgba(255,255,255,0.05)',
 }
-const descriptionStyle = {
-	color: '#ccc',
-	lineHeight: '1.7',
-	fontSize: '1.1rem',
-	maxWidth: '500px',
-}
+const descriptionStyle = { color: '#ccc', lineHeight: '1.6', fontSize: '1rem' }
 
 export default CarDetails

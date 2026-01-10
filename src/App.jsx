@@ -16,6 +16,7 @@ import Footer from './components/Footer/Footer'
 import Header from './components/Header/Header'
 import Profile from './profile/Profile'
 import Auth from './pages/AuthPage'
+import ChironDetails from './pages/ChironDetails'
 
 const ProtectedRoute = ({ children }) => {
 	const isAdmin = useSelector(state => state.auth?.isAdmin || false)
@@ -36,6 +37,7 @@ function App() {
 				<Routes>
 					<Route path='/' element={<Home />} />
 					<Route path='/catalog' element={<Catalog />} />
+					<Route path="/recommended/:id" element={<ChironDetails />} />
 					<Route path='/catalog/:id' element={<CarDetails />} />
 					<Route path='/about' element={<About />} />
 					<Route path='/garage' element={<Garage />} />

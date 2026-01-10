@@ -175,7 +175,7 @@ const Home = () => {
 
 										<button
 											className='btn-details'
-											onClick={() => navigate(`/catalog/${car.id}`)}
+											onClick={() => navigate(`/recommended/${car.id}`)}
 										>
 											{lang === 'en'
 												? 'Details'

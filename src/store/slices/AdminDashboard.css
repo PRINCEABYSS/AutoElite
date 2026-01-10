@@ -223,3 +223,12 @@
     background: #ff4d4d;
     color: white;
 }
+.specs-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 10px;
+}
+.specs-grid input {
+  margin-bottom: 0 !important; /* Убираем лишние отступы */
+}

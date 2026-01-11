@@ -1,12 +1,11 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { api } from '../../Api/axios';
 
-// 1. Загрузка списка машин
 export const fetchCars = createAsyncThunk(
   'cars/fetchCars',
   async (_, { rejectWithValue }) => {
     try {
-      // MockAPI возвращает массив напрямую по адресу /cars
+     
       const res = await api.get('/cars'); 
       return res.data; 
     } catch (error) {
@@ -15,7 +14,6 @@ export const fetchCars = createAsyncThunk(
   }
 );
 
-// 2. Добавление машины
 export const addCar = createAsyncThunk(
   'cars/addCar',
   async (newCar, { rejectWithValue }) => {
@@ -28,7 +26,6 @@ export const addCar = createAsyncThunk(
   }
 );
 
-// 3. Удаление машины
 export const removeCar = createAsyncThunk(
   'cars/removeCar',
   async (id, { rejectWithValue }) => {
@@ -56,7 +53,7 @@ const carsSlice = createSlice({
       })
       .addCase(fetchCars.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        // Твое API возвращает чистый массив
+       
         state.list = Array.isArray(action.payload) ? action.payload : [];
       })
       .addCase(fetchCars.rejected, (state, action) => {
@@ -67,7 +64,7 @@ const carsSlice = createSlice({
         state.list.unshift(action.payload);
       })
       .addCase(removeCar.fulfilled, (state, action) => {
-        // Фильтруем по ID, чтобы машина исчезла из списка сразу
+   
         state.list = state.list.filter(car => String(car.id) !== String(action.payload));
       });
   },

@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 const Filters = ({ brand, setBrand, price, setPrice }) => {
   const { list } = useSelector((state) => state.cars);
   
-  // Безопасный map для создания списка брендов
+  
   const uniqueBrands = [...new Set((list || []).map(car => car.brand))].filter(Boolean);
 
   return (

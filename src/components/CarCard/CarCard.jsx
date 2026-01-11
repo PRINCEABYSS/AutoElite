@@ -7,7 +7,7 @@ const CarCard = ({ car }) => {
   const dispatch = useDispatch();
   if (!car) return null;
 
-  // Берем первую картинку из массива images, как в твоем MockAPI
+  
   const cardImage = car.images?.[0] || car.image || 'https://via.placeholder.com/300x200';
 
   return (

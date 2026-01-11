@@ -7,13 +7,12 @@ const AdminDashboard = () => {
   const dispatch = useDispatch()
   const { list, status } = useSelector(state => state.cars)
 
-  // 1. Добавлено поле videoUrl в состояние
   const [formData, setFormData] = useState({
     model: '',
     brand: '',
     price: '',
     image: '',
-    videoUrl: '',     // <--- Поле для видео фона
+    videoUrl: '',   
     year: '',
     engine: '',
     hp: '',
@@ -38,7 +37,6 @@ const AdminDashboard = () => {
     const result = await dispatch(addCar(carData))
     
     if (addCar.fulfilled.match(result)) {
-      // Очистка всех полей, включая видео
       setFormData({ 
         model: '', brand: '', price: '', image: '', 
         videoUrl: '', 
@@ -127,7 +125,6 @@ const AdminDashboard = () => {
                   onChange={e => setFormData({ ...formData, image: e.target.value })} 
                   required 
                 />
-                {/* НОВОЕ ПОЛЕ: Ссылка на видео */}
                 <input 
                   placeholder='URL фонового видео (.mp4)' 
                   value={formData.videoUrl} 

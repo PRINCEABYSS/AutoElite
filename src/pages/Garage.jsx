@@ -58,16 +58,13 @@ const Garage = () => {
   const lang = useSelector((state) => state.language?.lang || 'ru');
   const t = translations[lang] || translations.ru;
 
-  // UI States
   const [searchTerm, setSearchTerm] = useState('');
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
   const [orderStep, setOrderStep] = useState(1);
   const [formData, setFormData] = useState({ name: '', phone: '', city: 'Bishkek' });
 
-  // Statistics
   const totalCost = useMemo(() => cars.reduce((sum, car) => sum + Number(car.price), 0), [cars]);
 
-  // Filter Logic
   const filteredCars = useMemo(() => {
     return cars.filter(car => 
       `${car.brand} ${car.model}`.toLowerCase().includes(searchTerm.toLowerCase())
@@ -83,7 +80,6 @@ const Garage = () => {
   const handleCloseSuccess = () => {
     setIsCheckoutOpen(false);
     setOrderStep(1);
-    // Здесь можно вызвать dispatch(clearGarage()) если такой экшен есть
   };
 
   if (cars.length === 0 && orderStep !== 2) {

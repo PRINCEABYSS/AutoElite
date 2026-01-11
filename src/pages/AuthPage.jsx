@@ -12,11 +12,9 @@ const Auth = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isLogin) {
-      // Имитируем логин
       dispatch(login({ email: formData.email, password: formData.password }));
       navigate('/profile');
     } else {
-      // Регистрация: сохраняем в список пользователей
       const newUser = { ...formData, id: Date.now(), role: 'user' };
       dispatch(register(newUser));
       alert("Аккаунт создан! Теперь войдите.");

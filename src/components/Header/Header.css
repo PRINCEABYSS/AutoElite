@@ -33,7 +33,6 @@
   align-items: center;
 }
 
-/* ЛОГОТИП */
 .logo { 
   font-size: 1.6rem; 
   font-weight: 900; 
@@ -44,7 +43,6 @@
 }
 .logo span { color: #fff; }
 
-/* НАВИГАЦИЯ */
 nav ul { 
   display: flex; 
   list-style: none; 
@@ -59,14 +57,12 @@ nav a {
 }
 nav a:hover { color: var(--primary-color); }
 
-/* ДЕЙСТВИЯ */
 .header-actions { 
   display: flex; 
   align-items: center; 
   gap: 15px; 
 }
 
-/* ЯЗЫК */
 .lang-select-wrapper {
   position: relative;
   background: rgba(255, 255, 255, 0.05);
@@ -96,7 +92,6 @@ nav a:hover { color: var(--primary-color); }
   background: var(--primary-color); color: #fff;
 }
 
-/* ГАРАЖ */
 .garage-link {
   background: var(--primary-color);
   padding: 0.6rem 1.2rem; 
@@ -119,7 +114,6 @@ nav a:hover { color: var(--primary-color); }
   border-radius: 6px;
 }
 
-/* СТИЛЬ ПРОФИЛЯ (ПРЕМИУМ) */
 .profile-trigger {
   display: flex;
   align-items: center;
@@ -155,7 +149,6 @@ nav a:hover { color: var(--primary-color); }
 .user-name-label { font-size: 0.85rem; font-weight: 700; }
 .user-status-label { font-size: 0.6rem; color: var(--primary-color); text-transform: uppercase; font-weight: 900; }
 
-/* ВХОД (ДЛЯ ГОСТЕЙ) */
 .login-trigger {
   display: flex; align-items: center; gap: 10px;
   text-decoration: none; color: #fff;
@@ -166,7 +159,7 @@ nav a:hover { color: var(--primary-color); }
 }
 .login-trigger:hover { border-color: var(--primary-color); color: var(--primary-color); }
 
-/* БУРГЕР */
+
 .burger {
   display: none; flex-direction: column; gap: 6px;
   background: none; border: none; cursor: pointer; z-index: 1001;
@@ -179,7 +172,7 @@ nav a:hover { color: var(--primary-color); }
 .burger.open span:nth-child(2) { opacity: 0; }
 .burger.open span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
 
-/* --- АДАПТИВНОСТЬ --- */
+
 
 @media (max-width: 992px) {
   .burger { display: flex; }
@@ -193,7 +186,7 @@ nav a:hover { color: var(--primary-color); }
   nav.nav-active { right: 0; }
   nav ul { flex-direction: column; gap: 25px; }
   nav a { font-size: 1.4rem; }
-  .lang-select-wrapper { display: none; } /* Можно добавить в nav */
+  .lang-select-wrapper { display: none; } 
 }
 
 @media (max-width: 600px) {
@@ -205,29 +198,26 @@ nav a:hover { color: var(--primary-color); }
   .profile-trigger { padding: 3px; border: none; background: transparent; }
   .avatar-circle { width: 40px; height: 40px; }
 }
-/* Общий контейнер для всех действий справа */
+
 .header-actions {
   display: flex;
-  flex-direction: row; /* Выстраиваем в ряд */
-  align-items: center; /* Центрируем по вертикали */
-  gap: 15px; /* Расстояние между языком и группой пользователя */
+  flex-direction: row; 
+  align-items: center; 
+  gap: 15px; 
 }
 
-/* Группа, где находятся Гараж и Профиль */
 .user-group {
   display: flex;
-  flex-direction: row; /* Явно задаем ряд */
+  flex-direction: row; 
   align-items: center;
-  gap: 12px; /* Расстояние между Гаражом и Профилем */
+  gap: 12px; 
 }
 
-/* Убираем возможные блочные свойства у ссылок */
 .garage-link, .profile-trigger {
   display: flex;
-  white-space: nowrap; /* Запрещаем перенос текста внутри кнопок */
+  white-space: nowrap; 
 }
 
-/* На мобильных устройствах, если места мало */
 @media (max-width: 992px) {
   .header-actions {
     gap: 8px;

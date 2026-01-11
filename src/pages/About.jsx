@@ -46,7 +46,6 @@ const About = () => {
 
   return (
     <div className='about-luxury-page'>
-      {/* BACKGROUND VIDEO SECTION */}
       <div className="video-background-container">
         <video autoPlay loop muted playsInline className="bg-video">
           <source src={bgVideo} type="video/mp4" />
@@ -54,7 +53,6 @@ const About = () => {
         <div className="video-overlay"></div>
       </div>
 
-      {/* MAIN CONTENT */}
       <div className='about-content container'>
         <header className='about-hero-glass'>
           <span className='premium-badge'>{content.badge[lang]}</span>

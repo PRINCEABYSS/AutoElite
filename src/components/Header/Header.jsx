@@ -34,12 +34,11 @@ const Header = () => {
   return (
     <header className={`header ${!isVisible ? 'header-hidden' : ''}`}>
       <div className='container header-content'>
-        {/* ЛОГОТИП */}
+     
         <Link to='/' className='logo' onClick={() => setIsMenuOpen(false)}>
           Auto<span>Elite</span>
         </Link>
 
-        {/* БУРГЕР (для мобильных) */}
         <button 
           className={`burger ${isMenuOpen ? 'open' : ''}`} 
           onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -48,7 +47,7 @@ const Header = () => {
           <span></span><span></span><span></span>
         </button>
 
-        {/* НАВИГАЦИЯ */}
+     
         <nav className={isMenuOpen ? 'nav-active' : ''}>
           <ul onClick={() => setIsMenuOpen(false)}>
             <li><Link to='/'>{t.home}</Link></li>
@@ -58,10 +57,10 @@ const Header = () => {
           </ul>
         </nav>
 
-        {/* ПРАВАЯ ЧАСТЬ: ЯЗЫК, ГАРАЖ, ПРОФИЛЬ */}
+       
         <div className='header-actions'>
           
-          {/* ПЕРЕКЛЮЧАТЕЛЬ ЯЗЫКА */}
+      
           <div className='lang-select-wrapper'>
             <div className='lang-current'>
               🌐 {lang.toUpperCase()}
@@ -80,7 +79,7 @@ const Header = () => {
           </div>
 
           <div className="user-group">
-            {/* ГАРАЖ */}
+          
             <Link to='/garage' className='garage-link' onClick={() => setIsMenuOpen(false)}>
               <span className='emoji-icon'>🏎</span>
               <span className='garage-text'>{t.garage}</span>
@@ -89,7 +88,7 @@ const Header = () => {
               )}
             </Link>
 
-            {/* ПРОФИЛЬ ИЛИ ВХОД */}
+            
             {user ? (
               <Link to='/profile' className='profile-trigger' onClick={() => setIsMenuOpen(false)}>
                 <div className='avatar-wrapper'>

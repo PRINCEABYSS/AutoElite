@@ -22,7 +22,6 @@ const Catalog = () => {
     return <div className="loader-container"><div className="spinner"></div></div>;
   }
 
-  // Безопасная фильтрация: если list пуст, используем пустой массив
   const filteredCars = (list || []).filter((car) => {
     const matchBrand = !brand || car.brand === brand;
     const matchPrice = !price || Number(car.price) <= Number(price);

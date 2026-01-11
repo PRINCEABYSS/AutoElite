@@ -4,7 +4,6 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { api } from '../Api/axios'
 import { addToGarage } from '../features/garage/garageSlice'
 
-// Твои локальные ассеты
 import audi from '../assets/PixVerse_V5.5_Image_Text_360P_сделай_мне_69_се.mp4'
 import bmw from '../assets/бмв видео.mp4'
 import bugatti from '../assets/буггати видео.mp4'
@@ -83,7 +82,6 @@ const CarDetails = () => {
 	const allImages =
 		car.images && car.images.length > 0 ? car.images : [car.image]
 
-	// Приоритет: Видео из админки -> Видео по бренду
 	const currentVideo = car.videoUrl || videoMap[car.brand]
 
 	return (
@@ -106,7 +104,6 @@ const CarDetails = () => {
 
 			<div className='page-content' style={contentContainerStyle}>
 				<div style={flexRowStyle}>
-					{/* Левая колонка */}
 					<div style={{ flex: '1.2', minWidth: '350px' }}>
 						<img
 							src={allImages[activeImg]}
@@ -138,7 +135,6 @@ const CarDetails = () => {
 						</div>
 					</div>
 
-					{/* Правая колонка */}
 					<div style={{ flex: '1', minWidth: '350px' }}>
 						<div style={{ marginBottom: '25px' }}>
 							<span style={brandBadgeStyle}>{car.brand}</span>
@@ -176,7 +172,6 @@ const CarDetails = () => {
 							</div>
 						)}
 
-						{/* БЛОК КНОПОК - Исправлено расположение */}
 						<div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
 							<button
 								className={`btn-main-action ${isAdded ? 'added' : ''}`}
@@ -223,7 +218,6 @@ const CarDetails = () => {
 	)
 }
 
-// Стили объекта
 const pageWrapperStyle = {
 	position: 'relative',
 	minHeight: '100vh',

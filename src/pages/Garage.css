@@ -3,7 +3,6 @@
   min-height: 100vh;
   position: relative;
   color: white;
-  /* Фоновое изображение через переменную */
   background-image: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)), var(--bg-image);
   background-size: cover;
   background-position: center;
@@ -75,7 +74,6 @@
   box-shadow: 0 5px 15px rgba(255, 107, 53, 0.4);
 }
 
-/* ПОИСК */
 .garage-search-input {
   width: 100%;
   max-width: 400px;
@@ -95,7 +93,6 @@
   background: rgba(255, 255, 255, 0.1);
 }
 
-/* СЕТКА КАРТОЧЕК */
 .garage-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -183,7 +180,6 @@
   color: white;
 }
 
-/* ЭКРАН ПУСТОГО ГАРАЖА */
 .empty-garage-view {
   display: flex;
   align-items: center;
@@ -214,7 +210,6 @@
   cursor: pointer;
 }
 
-/* МОДАЛКА */
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -262,7 +257,6 @@
   cursor: pointer;
 }
 
-/* Улучшение для селектов и инпутов в модалке */
 .input-group input, .input-group select {
   width: 100%;
   background: #1a1a1a;
